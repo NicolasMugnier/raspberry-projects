@@ -14,14 +14,17 @@ difference = pygame.transform.scale(difference, (width, height))
 screen.blit(difference, (0,0))
 pygame.display.update()
 
-sleep(randrange(5, 15))
-
 zombie = pygame.image.load('scary_face.png')
 zombie = pygame.transform.scale(zombie, (width, height))
+scream = pygame.mixer.Sound('scream.wav')
 
+sleep(randrange(5, 15))
+
+scream.play()
 screen.blit(zombie, (0,0))
 pygame.display.update()
 
 sleep(3)
 
+scream.stop()
 pygame.quit()
