@@ -1,0 +1,36 @@
+<html>
+	<head>
+		<title>
+			DHT22
+	 	</title>
+		<style>
+		#main {
+			font-size: 50px;
+		}
+		</style>
+	</head>
+	<body>
+		<p id="main">Temperature: <span id="temperature">{{temperature}}</span> °C, Humidity: <span id="humidity">{{humidity}}</span> %</p>
+			<script>
+
+				async function read() {
+					while(true) {
+						const request = new XMLHttpRequest();
+						request.open('GET', '/data', false);
+						request.send(null);
+						response = request.responseText;
+						data = JSON.parse(response);
+						document.getElementById('temperature').textContent = data.temperature.value;
+						document.getElementById('humidity').textContent = data.humidity.value;
+						await sleep(2000);				
+					}
+				}
+
+				function sleep(ms) {
+					return new Promise(resolve => setTimeout(resolve, ms));
+				}
+
+				read();
+			</script>
+	</body>
+</html>
